@@ -112,4 +112,11 @@ if __name__ == "__main__":
     for prod in lista:
         print(f"ID: {prod[0]} | Producto: {prod[1]} | Precio: ${prod[2]} | Stock: {prod[3]} | Categoría: {prod[4]}")
 
-    
+    # Supongamos que llegó un proveedor y la Leche pasó de tener 10 a 25 piezas:
+    # (Asumiendo que la Leche tiene el ID 1)
+    actualizar_stock(producto_id=1, nueva_cantidad=25)
+
+    print("\n--- Inventario actualizado ---")
+    lista = obtener_productos()
+    for prod in lista:
+        print(f"ID: {prod[0]} | Producto: {prod[1]} | Precio: ${prod[2]} | Stock: {prod[3]} | Categoría: {prod[4]}")
