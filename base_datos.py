@@ -63,6 +63,21 @@ def agregar_producto(nombre, precio, stock, categoria_id):
     finally:
         conexion.close()
 
+def actualizar_stock(producto_id, nueva_cantidad):
+    """Actualiza la cantidad en stock de un producto específico por su ID"""
+    conexion = sqlite3.connect("tiendita.db")
+    cursor = conexion.cursor()
+    
+    cursor.execute("""
+        UPDATE productos 
+        SET stock = ? 
+        WHERE id = ?
+    """, (nueva_cantidad, producto_id))
+    
+    conexion.commit()
+    conexion.close()
+    print(f"¡Stock actualizado con éxito para el producto ID {producto_id}!")
+
 def obtener_productos():
     """Devuelve la lista de productos unida a sus nombres de categoría (JOIN)"""
     conexion = sqlite3.connect("tiendita.db")
@@ -72,7 +87,8 @@ def obtener_productos():
     cursor.execute("""
         SELECT p.id, p.nombre, p.precio, p.stock, c.nombre 
         FROM productos p
-        LEFT JOIN categorias c ON p.categoria_id = c.id
+        LEFT JOIN categorias c 
+        ON p.categoria_id = c.id
     """)
     productos = cursor.fetchall()
     conexion.close()
