@@ -97,3 +97,19 @@ def obtener_productos():
 # Permite ejecutar la función directamente desde la terminal
 if __name__ == "__main__":
     inicializar_base_datos()
+
+    # 1. Agregamos categorías de prueba
+    agregar_categoria("Lácteos")
+    agregar_categoria("Abarrotes")
+
+    # 2. Agregamos productos (id_categoria 1 = Lácteos, id_categoria 2 = Abarrotes)
+    agregar_producto("Leche Entera 1L", 26.50, 10, 1)
+    agregar_producto("Frijol Negro 1kg", 34.00, 15, 2)
+
+    # 3. Consultamos el inventario
+    print("\n--- INVENTARIO ACTUAL ---")
+    lista = obtener_productos()
+    for prod in lista:
+        print(f"ID: {prod[0]} | Producto: {prod[1]} | Precio: ${prod[2]} | Stock: {prod[3]} | Categoría: {prod[4]}")
+
+    
